@@ -100,7 +100,7 @@ async def _main() -> None:
         )
 
         init_opts = InitializationOptions(
-            server_name="chirikukan-mcp", server_version="0.1.0", capabilities=caps
+            server_name="mlit-geospatial-mcp", server_version="0.1.0", capabilities=caps
         )
 
         logger.info("MCP server starting...")
