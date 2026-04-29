@@ -4,3 +4,5 @@ shapely
 pyproj
 requests
 asyncio
+starlette
+uvicorn

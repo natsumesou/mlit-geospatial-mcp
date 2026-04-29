@@ -10,6 +10,7 @@ Classes:
 
 import asyncio
 import json
+import os
 from datetime import datetime
 from pathlib import Path
 
@@ -22,6 +23,11 @@ from utils.coordinates_conversion import (
 )
 from utils.logger_config import setup_logger
 from utils.map_url_generator import build_map_url
+
+
+DEFAULT_OUTPUT_DIR = os.getenv("MLIT_OUTPUT_DIR") or (
+    "C:/output" if os.name == "nt" else "/tmp/mlit-output"
+)
 
 
 class GeospatialService:
@@ -87,7 +93,7 @@ class GeospatialService:
                 ),
             }
 
-        base_output_folder = "C:/output"
+        base_output_folder = DEFAULT_OUTPUT_DIR
         file_paths = []
 
         now_folder = datetime.now().strftime("%Y%m%d%H%M")

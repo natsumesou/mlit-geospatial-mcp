@@ -1,3 +1,5 @@
+import os
+
 import requests
 
 from utils.logger_config import setup_logger
@@ -5,6 +7,7 @@ from utils.logger_config import setup_logger
 # 外部API呼び出し共通処理
 
 logger = setup_logger(__name__)
+VERIFY_SSL = os.getenv("REQUESTS_VERIFY_SSL", "true").lower() != "false"
 
 
 def get(
@@ -13,7 +16,13 @@ def get(
     headers = headers or {"Accept": "*/*"}
 
     try:
-        response = requests.get(url, headers=headers, params=params, verify=False)
+        response = requests.get(
+            url,
+            headers=headers,
+            params=params,
+            verify=VERIFY_SSL,
+            timeout=30,
+        )
         response.raise_for_status()
 
         if response_type in ("json", "geojson"):
